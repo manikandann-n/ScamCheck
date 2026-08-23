@@ -8,7 +8,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="ScamCheck API", description="Student opportunity verification platform")
 
-# ✅ CORRECT CORS CONFIGURATION
+# ✅ CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -22,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routes
+# Your routes
 app.include_router(health.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
 app.include_router(analyze.router, prefix="/api")
