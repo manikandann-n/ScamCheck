@@ -36,17 +36,3 @@ app.include_router(history.router, prefix="/api")
 @app.get("/")
 async def root():
     return {"message": "ScamCheck API", "version": "1.0.0"}
-@app.get("/api/debug/database")
-def debug_database():
-    from sqlalchemy import text
-    from .database import engine
-
-    with engine.connect() as connection:
-        result = connection.execute(
-            text("SELECT DATABASE(), CURRENT_USER()")
-        ).fetchone()
-
-    return {
-        "database": result[0],
-        "user": result[1]
-    }
