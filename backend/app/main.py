@@ -17,11 +17,10 @@ app = FastAPI(
 # ---- CORS Configuration ----
 # Allow your frontend (Vercel) and backend (Render) plus local dev
 allow_origins = [
-    "https://scamcheck.vercel.app",           # Your Vercel frontend
-    "https://scamcheck-2-xqh3.onrender.com",  # Your Render backend
-    "http://localhost:5173",                  # Local development
-    "http://127.0.0.1:5173",                  # Local development alternative
-    "http://localhost:3000",                  # Alternative local port
+    "https://scamcheck.vercel.app",           # <- your exact frontend URL
+    "https://scamcheck-2-xqh3.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(
