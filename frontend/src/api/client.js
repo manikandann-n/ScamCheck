@@ -7,7 +7,6 @@ const apiClient = axios.create({
   },
 })
 
-// Add token to every request
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
@@ -21,7 +20,6 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Handle 401 errors
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -35,13 +33,11 @@ apiClient.interceptors.response.use(
 )
 
 const api = {
-  // Register
   register: async (userData) => {
     const response = await apiClient.post('/auth/register', userData)
     return response.data
   },
 
-  // Login
   login: async (email, password) => {
     const formData = new URLSearchParams()
 
@@ -57,13 +53,11 @@ const api = {
     return response.data
   },
 
-  // Get current logged-in user
   getCurrentUser: async () => {
     const response = await apiClient.get('/auth/me')
     return response.data
   },
 
-  // Set authentication token
   setAuthToken: (token) => {
     if (token) {
       apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -72,13 +66,11 @@ const api = {
     }
   },
 
-  // Analyze opportunity
   analyze: async (text) => {
     const response = await apiClient.post('/analyze', { text })
     return response.data
   },
 
-  // Get analysis history
   getHistory: async (search = '', riskFilter = '') => {
     const params = new URLSearchParams()
 
@@ -94,19 +86,16 @@ const api = {
     return response.data
   },
 
-  // Get single analysis
   getAnalysis: async (id) => {
     const response = await apiClient.get(`/history/${id}`)
     return response.data
   },
 
-  // Delete history
   deleteHistory: async (id) => {
     const response = await apiClient.delete(`/history/${id}`)
     return response.data
   },
 
-  // Health check
   health: async () => {
     const response = await apiClient.get('/health')
     return response.data
