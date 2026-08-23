@@ -7,7 +7,7 @@ const apiClient = axios.create({
   },
 })
 
-// Add token to requests
+// Add token to every request
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
@@ -19,7 +19,7 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Add response interceptor to handle 401 errors
+// Handle 401 errors
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -32,12 +32,10 @@ apiClient.interceptors.response.use(
 )
 
 const api = {
-  // Auth
   register: async (userData) => {
     const response = await apiClient.post('/auth/register', userData)
     return response.data
   },
-
   login: async (email, password) => {
     const formData = new URLSearchParams()
     formData.append('username', email)
@@ -49,17 +47,10 @@ const api = {
     })
     return response.data
   },
-
   getCurrentUser: async () => {
     const response = await apiClient.get('/auth/me')
     return response.data
   },
-
-  logout: async () => {
-    const response = await apiClient.post('/auth/logout')
-    return response.data
-  },
-
   setAuthToken: (token) => {
     if (token) {
       apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -67,13 +58,10 @@ const api = {
       delete apiClient.defaults.headers.common['Authorization']
     }
   },
-
-  // Analysis
   analyze: async (text) => {
     const response = await apiClient.post('/analyze', { text })
     return response.data
   },
-
   getHistory: async (search = '', riskFilter = '') => {
     const params = new URLSearchParams()
     if (search) params.append('search', search)
@@ -81,17 +69,14 @@ const api = {
     const response = await apiClient.get(`/history?${params}`)
     return response.data
   },
-
   getAnalysis: async (id) => {
     const response = await apiClient.get(`/history/${id}`)
     return response.data
   },
-
   deleteHistory: async (id) => {
     const response = await apiClient.delete(`/history/${id}`)
     return response.data
   },
-
   health: async () => {
     const response = await apiClient.get('/health')
     return response.data

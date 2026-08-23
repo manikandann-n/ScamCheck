@@ -102,8 +102,7 @@ function Analyzer({ showToast }) {
     showToast('📸 Processing screenshot...', 'info')
 
     try {
-      // Simple text extraction simulation (or use Tesseract if installed)
-      // For now, just show a message
+      // Simulate OCR (replace with actual Tesseract.js if needed)
       setTimeout(() => {
         const extracted = "Congratulations! You have been selected for our internship program.\n\nPay ₹1999 registration fee today.\nOnly 10 seats remaining.\nContact us on WhatsApp immediately."
         setExtractedText(extracted)
@@ -351,5 +350,5 @@ function Analyzer({ showToast }) {
   )
 }
 
-// Make sure this is at the end - DEFAULT EXPORT
+// ✅ THIS IS CRUCIAL – Default export
 export default Analyzer
