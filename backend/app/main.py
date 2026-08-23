@@ -10,7 +10,7 @@ app = FastAPI(title="ScamCheck API", description="Student opportunity verificati
 allow_origins=[
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://your-frontend.vercel.app",  # Add your Vercel URL
+
     "https://scamcheck-2-xqh3.onrender.com",  # Backend itself
 ]
 # ✅ CORS Configuration
@@ -19,7 +19,6 @@ app.add_middleware(
    allow_origins=[
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://your-frontend.vercel.app",  # Add your Vercel URL
     "https://scamcheck-2-xqh3.onrender.com",  # Backend itself
 ],
     allow_credentials=True,
